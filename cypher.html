@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Caesar Cipher</title>
+    <style>
+      body {
+        background-color: rgb(147, 190, 228);
+        font-family: Arial, sans-serif;
+      }
+      header {
+        background-color: lightcoral;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+      }
+      textarea {
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        margin: 10px;
+        width: 500px;
+        height: 300px;
+        border-radius: 10px;
+        border: 1px solid #333;
+        display: block;
+        margin: 0 auto;
+        margin-top: 100px;
+      }
+      input[type="text"] {
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        border: 1px solid #333;
+        display: block;
+        margin: 0 auto;
+      }
+      input[type="button"] {
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        border: 1px solid #333;
+        background-color: #ddd;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 auto;
+      }
+    </style>
+    <script>
+      function encrypt() {
+        let text = document.getElementById("text").value;
+        let shift = parseInt(document.getElementById("shift").value);
+        let result = "";
+        for (let i = 0; i < text.length; i++) {
+          let char = text.charCodeAt(i);
+          if (char >= 65 && char <= 90) {
+            result += String.fromCharCode((char - 65 + shift) % 26 + 65);
+          } else if (char >= 97 && char <= 122) {
+            result += String.fromCharCode((char - 97 + shift) % 26 + 97);
+          } else {
+            result += text.charAt(i);
+          }
+        }
+        document.getElementById("text").value = result;
+      }
+
+      function decrypt() {
+        let text = document.getElementById("text").value;
+        let shift = parseInt(document.getElementById("shift").value);
+        let result = "";
+        for (let i = 0; i < text.length; i++) {
+          let char = text.charCodeAt(i);
+          if (char >= 65 && char <= 90) {
+            result += String.fromCharCode((char - 65 - shift + 26) % 26 + 65);
+          } else if (char >= 97 && char <= 122) {
+            result += String.fromCharCode((char - 97 - shift + 26) % 26 + 97);
+          } else {
+            result += text.charAt(i);
+          }
+        }
+        document.getElementById("text").value = result;
+      }
+      
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+          <ul>
+          <li><a href="https://github.com/tottopath"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="40" height="40" alt="GitHub Logo"></a></li>
+          </ul>
+      </nav>
+      <h1 style="color: rgb(242, 239, 239); font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">My Playground</h1>
+      <nav>
+          <ul>
+          <li><a href="https://linkedin.com/in/shreyas-t-304007123"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/LinkedIn_2021.svg/1920px-LinkedIn_2021.svg.png" width="100" height="30" alt="LinkedIn Logo"></a></li>
+          </ul>
+      </nav>
+    </header>   
+    <div style="display: flex; height: calc(100% - 60px); justify-content: center; align-items: center;">
+      <textarea id="text" rows="10" cols="50"></textarea><br />
+      Shift: <input type="text" id="shift" value="3" /><br />
+      <input type="button" value="Encrypt" onclick="encrypt()" />
+      <input type="button" value="Decrypt" onclick="decrypt()" />
+    </div>
+  </body>
+</html>
